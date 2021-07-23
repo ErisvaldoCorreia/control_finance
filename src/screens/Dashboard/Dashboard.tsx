@@ -1,11 +1,25 @@
 import React from 'react';
 
-import { Container, Title } from './styles';
+import { Container, Header, Photo, UserGreetings, UserInfo, UserName, User, UserWrapper } from './styles';
 
 export function Dashboard() {
   return (
     <Container>
-      <Title>Control Finance</Title>
+      <Header>
+        <UserWrapper>
+          <UserInfo>
+            <Photo source={{uri: 'https://avatars.githubusercontent.com/u/31773949?v=4'}} />
+          <User>
+            <UserGreetings>
+                Olá,
+              </UserGreetings>
+              <UserName>
+                Erisvaldo
+              </UserName>
+          </User>
+          </UserInfo>
+        </UserWrapper>
+      </Header>
     </Container>
   );
 }
