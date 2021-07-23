@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Feather } from '@expo/vector-icons';
 
 export const Container = styled.View`
     flex: 1;
@@ -17,6 +18,7 @@ export const UserWrapper = styled.View`
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: 0 24px;
 `;
 
@@ -44,4 +46,9 @@ export const UserName = styled.Text`
     color: ${({theme}) => theme.colors.shape};
     font-size: 18px;
     font-weight: bold;
+`;
+
+export const IconPower = styled(Feather)`
+    color: ${({theme}) => theme.colors.secondary};
+    font-size: 28px;
 `;
