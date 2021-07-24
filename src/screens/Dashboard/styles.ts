@@ -8,7 +8,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     width: 100%;
-    height: 42%;
+    height: 40%;
     background-color: ${({theme}) => theme.colors.primary};
     justify-content: center;
     align-items: center;
@@ -38,11 +38,13 @@ export const User = styled.View`
 `;
 
 export const UserGreetings = styled.Text`
+    font-family: ${({theme}) => theme.fonts.regular};
     color: ${({theme}) => theme.colors.shape};
     font-size: 18px;
 `;
 
 export const UserName = styled.Text`
+    font-family: ${({theme}) => theme.fonts.bold};
     color: ${({theme}) => theme.colors.shape};
     font-size: 18px;
     font-weight: bold;

@@ -1,6 +1,15 @@
 import React from 'react';
-
-import { Container, Header, Photo, UserGreetings, UserInfo, UserName, User, UserWrapper, IconPower } from './styles';
+import { 
+  Container, 
+  Header, 
+  Photo, 
+  UserGreetings, 
+  UserInfo, 
+  UserName, 
+  User, 
+  UserWrapper, 
+  IconPower 
+} from './styles';
 
 export function Dashboard() {
   return (
@@ -8,7 +17,9 @@ export function Dashboard() {
       <Header>
         <UserWrapper>
           <UserInfo>
-            <Photo source={{uri: 'https://avatars.githubusercontent.com/u/31773949?v=4'}} />
+            <Photo 
+              source={{uri: 'https://avatars.githubusercontent.com/u/31773949?v=4'}} 
+            />
           <User>
             <UserGreetings>
                 Olá,
