@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { 
   Container, 
   Header, 
@@ -10,6 +11,7 @@ import {
   UserWrapper, 
   IconPower 
 } from './styles';
+import { Cards } from '../../components';
 
 export function Dashboard() {
   return (
@@ -32,6 +34,8 @@ export function Dashboard() {
           <IconPower name='power' />
         </UserWrapper>
       </Header>
+
+      <Cards />
     </Container>
   );
 }
