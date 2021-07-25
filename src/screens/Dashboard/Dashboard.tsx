@@ -9,7 +9,8 @@ import {
   UserName, 
   User, 
   UserWrapper, 
-  IconPower 
+  IconPower,
+  CardContainer
 } from './styles';
 import { Cards } from '../../components';
 
@@ -35,7 +36,11 @@ export function Dashboard() {
         </UserWrapper>
       </Header>
 
-      <Cards />
+      <CardContainer>
+        <Cards />
+        <Cards />
+        <Cards />
+      </CardContainer>
     </Container>
   );
 }

@@ -20,7 +20,7 @@ export function Cards() {
             <Content>
                 <Amount>R$ 10.000,00</Amount>
                 <InfoTransactions>
-                    Último depósito realizado em 17 de jun!
+                    Último entrada dia 17 de jun!
                 </InfoTransactions>
             </Content>
         </Container>

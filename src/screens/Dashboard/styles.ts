@@ -54,3 +54,9 @@ export const IconPower = styled(Feather)`
     color: ${({theme}) => theme.colors.secondary};
     font-size: 28px;
 `;
+
+export const CardContainer = styled.ScrollView.attrs({
+    horizontal: true,
+    showsHorizontalScrollIndicator: false,
+    contentContainerStyle: { paddingHorizontal: 24 }
+})``;
