@@ -31,15 +31,15 @@ export function Cards({
     infoTransaction,
 }: PropsCards) {
     return (
-        <Container>
+        <Container type={type}>
             <Header>
-                <Title>{title}</Title>
-                <Icon name={iconName[type]} />
+                <Title type={type}>{title}</Title>
+                <Icon name={iconName[type]} type={type} />
             </Header>
 
             <Content>
-                <Amount>{amount}</Amount>
-                <InfoTransactions>
+                <Amount type={type}>{amount}</Amount>
+                <InfoTransactions type={type}>
                     {infoTransaction}
                 </InfoTransactions>
             </Content>
