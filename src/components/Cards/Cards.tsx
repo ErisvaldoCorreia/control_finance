@@ -9,18 +9,38 @@ import {
     InfoTransactions,
 } from './styles';
 
-export function Cards() {
+export type TypeCard = 'income' | 'outcome' | 'total';
+
+interface PropsCards {
+    type: TypeCard;
+    title: string;
+    amount: string;
+    infoTransaction: string;
+}
+
+const iconName = {
+    income: 'arrow-up-circle',
+    outcome: 'arrow-down-circle',
+    total: 'dollar-sign'
+}
+
+export function Cards({
+    type,
+    title,
+    amount,
+    infoTransaction,
+}: PropsCards) {
     return (
         <Container>
             <Header>
-                <Title>Entrada</Title>
-                <Icon name='arrow-up-circle' />
+                <Title>{title}</Title>
+                <Icon name={iconName[type]} />
             </Header>
 
             <Content>
-                <Amount>R$ 10.000,00</Amount>
+                <Amount>{amount}</Amount>
                 <InfoTransactions>
-                    Último entrada dia 17 de jun!
+                    {infoTransaction}
                 </InfoTransactions>
             </Content>
         </Container>
