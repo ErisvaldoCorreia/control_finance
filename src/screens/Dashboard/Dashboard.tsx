@@ -11,7 +11,7 @@ import {
   UserWrapper, 
   IconPower,
   CardContainer,
-  Transactions,
+  ListTransactions,
   Title,
 } from './styles';
 import { Cards } from '../../components';
@@ -59,11 +59,12 @@ export function Dashboard() {
         />
       </CardContainer>
 
-      <Transactions>
+      <ListTransactions>
         <Title>
           Listagem de Transações:
         </Title>
-      </Transactions>
+      </ListTransactions>
+      
     </Container>
   );
 }

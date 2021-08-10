@@ -67,7 +67,7 @@ export const CardContainer = styled.ScrollView.attrs({
     margin-top: ${RFPercentage(20)}px;
 `;
 
-export const Transactions = styled.View`
+export const ListTransactions = styled.View`
     flex: 1;
     padding: 0 24px;
     margin-top: ${RFPercentage(12)}px;
