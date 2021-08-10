@@ -10,7 +10,9 @@ import {
   User, 
   UserWrapper, 
   IconPower,
-  CardContainer
+  CardContainer,
+  Transactions,
+  Title,
 } from './styles';
 import { Cards } from '../../components';
 
@@ -56,6 +58,12 @@ export function Dashboard() {
           infoTransaction='Entre 17 de jun e 20 de jun!' 
         />
       </CardContainer>
+
+      <Transactions>
+        <Title>
+          Listagem de Transações:
+        </Title>
+      </Transactions>
     </Container>
   );
 }
