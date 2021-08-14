@@ -18,7 +18,7 @@ export function Transaction(){
             <Amount>R$ 1.200,00</Amount>
             <InfoFooter>
                 <Category>
-                    <Icon name='dollar-signin' />
+                    <Icon name='dollar-sign' />
                     <CategoryName>Vendas</CategoryName>
                 </Category>
                 <DateTransaction>10/11/2020</DateTransaction>
