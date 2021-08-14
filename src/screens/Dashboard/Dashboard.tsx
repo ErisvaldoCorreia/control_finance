@@ -14,7 +14,7 @@ import {
   ListTransactions,
   Title,
 } from './styles';
-import { Cards } from '../../components';
+import { Cards, Transaction } from '../../components';
 
 export function Dashboard() {
   return (
@@ -63,8 +63,10 @@ export function Dashboard() {
         <Title>
           Listagem de Transações:
         </Title>
+
+        <Transaction />
       </ListTransactions>
-      
+
     </Container>
   );
 }
