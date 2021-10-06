@@ -1,2 +1,2 @@
 export { Cards } from './Cards/Cards';
-export { Transaction } from './Transaction/Transaction';
+export { Transaction, DataProps } from './Transaction/Transaction';

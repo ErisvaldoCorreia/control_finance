@@ -1,28 +1,52 @@
-import React from 'react';
+import React from "react";
 
 import {
-    Container,
-    Title,
-    Amount,
-    InfoFooter,
-    Category,
-    Icon,
-    CategoryName,
-    DateTransaction,
-} from './styles';
+  Container,
+  Title,
+  Amount,
+  InfoFooter,
+  Category,
+  Icon,
+  CategoryName,
+  DateTransaction,
+} from "./styles";
 
-export function Transaction(){
-    return (
-        <Container>
-            <Title>Desenvolvimento de Site</Title>
-            <Amount>R$ 1.200,00</Amount>
-            <InfoFooter>
-                <Category>
-                    <Icon name='dollar-sign' />
-                    <CategoryName>Vendas</CategoryName>
-                </Category>
-                <DateTransaction>10/11/2020</DateTransaction>
-            </InfoFooter>
-        </Container>
-    )
-};
+interface Category {
+  name: string;
+  icon: string;
+}
+
+export type EntryType = "positive" | "negative";
+
+export interface DataProps {
+  type: EntryType;
+  title: string;
+  amount: string;
+  date: string;
+  category: Category;
+}
+
+interface TransactionProps {
+  data: DataProps;
+}
+
+export function Transaction({ data }: TransactionProps) {
+  return (
+    <Container>
+      <Title>{data.title}</Title>
+      <Amount type={data.type}>
+        {data.type === "negative" && "- "}
+        {data.amount}
+      </Amount>
+
+      <InfoFooter>
+        <Category>
+          <Icon name={data.category.icon} />
+          <CategoryName>{data.category.name}</CategoryName>
+        </Category>
+
+        <DateTransaction>{data.date}</DateTransaction>
+      </InfoFooter>
+    </Container>
+  );
+}
