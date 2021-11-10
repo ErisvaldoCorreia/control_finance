@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     width: 100%;
-    height: ${RFPercentage(40)}px;
+    height: ${RFValue(278)}px;
     background-color: ${({theme}) => theme.colors.primary};
     justify-content: flex-start;
     align-items: center;
@@ -62,7 +62,7 @@ export const IconPower = styled(Feather)`
 export const CardContainer = styled.ScrollView.attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
-    contentContainerStyle: { paddingHorizontal: 24 }
+    contentContainerStyle: { paddingLeft: 24 }
 })`
     width: 100%;
     position: absolute;

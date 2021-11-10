@@ -13,7 +13,7 @@ export const Container = styled.View<TypeProps>`
         : theme.colors.shape};
     width: ${RFValue(300)}px;
     border-radius: ${RFValue(10)}px;
-    margin-right: 15px;
+    margin-right: ${RFValue(15)}px;
     padding: 20px 24px 42px 24px;
 `;
 
