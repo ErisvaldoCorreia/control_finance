@@ -8,6 +8,7 @@ type IconType = "income" | "outcome";
 interface IconButtonProps extends PressableProps {
   title: string;
   type: IconType;
+  isActive: boolean;
 }
 
 const icons = {
@@ -15,10 +16,15 @@ const icons = {
   outcome: "arrow-down-circle",
 };
 
-export function IconButton({ title, type, ...rest }: IconButtonProps) {
+export function IconButton({
+  title,
+  type,
+  isActive,
+  ...rest
+}: IconButtonProps) {
   return (
-    <Container {...rest}>
-      <Icon name={icons[type]} />
+    <Container {...rest} isActive={isActive} type={type}>
+      <Icon type={type} name={icons[type]} />
       <Title>{title}</Title>
     </Container>
   );
