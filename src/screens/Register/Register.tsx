@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, IconButton, Input } from "../../components";
+import { Button, IconButton, Input, Category } from "../../components";
 
 import {
   Container,
@@ -41,6 +41,7 @@ export function Register() {
               isActive={selectedTransaction === "outcome"}
             />
           </TransactionsButtons>
+          <Category title="Categoria" />
         </Fields>
         <Button title="Enviar" />
       </Form>
