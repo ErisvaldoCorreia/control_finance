@@ -10,7 +10,7 @@ import {
 import AppLoading from "expo-app-loading";
 
 import theme from "./src/theme/theme";
-import { Dashboard, Register } from "./src/screens";
+import { Dashboard, Register, CategorySelect } from "./src/screens";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,7 +26,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar backgroundColor="#5636d3" barStyle="light-content" />
-      <Register />
+      <CategorySelect />
     </ThemeProvider>
   );
 }
