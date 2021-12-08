@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.0",
     "@hookform/resolvers": "^2.8.4",
+    "@react-navigation/native": "^6.0.6",
     "expo": "~41.0.1",
     "expo-app-loading": "^1.1.2",
     "expo-font": "~9.1.0",
@@ -23,6 +24,7 @@
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.1.0",
     "react-native-responsive-fontsize": "^0.5.1",
+    "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
     "react-native-unimodules": "~0.13.3",
     "react-native-web": "~0.13.12",
