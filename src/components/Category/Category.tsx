@@ -4,11 +4,12 @@ import { Container, CategoryTitle, Icon } from "./styles";
 
 interface CategoryProps {
   title: string;
+  onPress: () => void;
 }
 
-export function Category({ title }: CategoryProps) {
+export function Category({ title, onPress }: CategoryProps) {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <CategoryTitle>{title}</CategoryTitle>
       <Icon name="chevron-down" />
     </Container>

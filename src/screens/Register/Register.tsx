@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Modal } from "react-native";
+
 import { Button, IconButton, Input, Category } from "../../components";
+import { CategorySelect } from "..";
 
 import {
   Container,
@@ -12,6 +15,11 @@ import {
 
 export function Register() {
   const [selectedTransaction, setSelecetedTransaction] = useState("");
+  const [modalCategory, setModalCategory] = useState(false);
+  const [category, setCategory] = useState({
+    key: "category",
+    name: "Categoria",
+  });
 
   const handleSetTransactionSelected = (type: "income" | "outcome") => {
     setSelecetedTransaction(type);
@@ -41,10 +49,21 @@ export function Register() {
               isActive={selectedTransaction === "outcome"}
             />
           </TransactionsButtons>
-          <Category title="Categoria" />
+          <Category
+            onPress={() => setModalCategory(true)}
+            title={category.name}
+          />
         </Fields>
         <Button title="Enviar" />
       </Form>
+
+      <Modal visible={modalCategory}>
+        <CategorySelect
+          category={category}
+          setCategory={setCategory}
+          onClose={() => setModalCategory(false)}
+        />
+      </Modal>
     </Container>
   );
 }
