@@ -20,6 +20,7 @@ import {
   Fields,
   TransactionsButtons,
 } from "./styles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FormData {
   name: string;
@@ -49,12 +50,13 @@ export function Register() {
     key: "category",
     name: "Categoria",
   });
+  const dataKey = "@controlFinance:transactions_collection";
 
   const handleSetTransactionSelected = (type: "income" | "outcome") => {
     setSelecetedTransaction(type);
   };
 
-  const handleRegister = (form: FormData) => {
+  const handleRegister = async (form: FormData) => {
     if (!selectedTransaction)
       return Alert.alert("Selecione um tipo de transação");
     if (category.key === "category")
@@ -67,7 +69,16 @@ export function Register() {
       category: category.key,
     };
 
+    // Dados que serão armazenados
     console.log(data);
+
+    // Salvando no Storage do Dispositivo
+    try {
+      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Não foi possivel salvar os dados");
+    }
   };
 
   return (
