@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Modal, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { Modal, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   Button,
@@ -20,7 +23,6 @@ import {
   Fields,
   TransactionsButtons,
 } from "./styles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FormData {
   name: string;
@@ -38,6 +40,7 @@ const schema = Yup.object().shape({
 export function Register() {
   const {
     control,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -50,6 +53,8 @@ export function Register() {
     key: "category",
     name: "Categoria",
   });
+
+  const navigation = useNavigation();
   const dataKey = "@controlFinance:transactions_collection";
 
   const handleSetTransactionSelected = (type: "income" | "outcome") => {
@@ -62,11 +67,14 @@ export function Register() {
     if (category.key === "category")
       return Alert.alert("Selecione uma categoria");
 
+    // Dados de uma transação que iremos gravar
     const newTransaction = {
+      id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
       selectedTransaction,
       category: category.key,
+      date: new Date(),
     };
 
     // Dados que serão armazenados
@@ -80,6 +88,17 @@ export function Register() {
       const newDataToStorage = [...currentData, newTransaction];
 
       await AsyncStorage.setItem(dataKey, JSON.stringify(newDataToStorage));
+
+      // Limpando os campos após salvar os dados.
+      reset();
+      setSelecetedTransaction("");
+      setCategory({
+        key: "category",
+        name: "Categoria",
+      });
+
+      //@ts-ignore
+      navigation.navigate("Listagem");
     } catch (error) {
       console.log(error);
       Alert.alert("Não foi possivel salvar os dados");
@@ -92,11 +111,11 @@ export function Register() {
       // Estamos usando o getItem para recuperar todos os dados presentes no storage.
       // Podemos usar o removeItem para remover os dados limpando o storage.
       const data = await AsyncStorage.getItem(dataKey);
-      console.log({ data });
+      console.log(data);
     }
 
     loadData();
-  }, []);
+  }, [AsyncStorage]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
