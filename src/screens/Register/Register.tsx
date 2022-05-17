@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -62,7 +62,7 @@ export function Register() {
     if (category.key === "category")
       return Alert.alert("Selecione uma categoria");
 
-    const data = {
+    const newTransaction = {
       name: form.name,
       amount: form.amount,
       selectedTransaction,
@@ -70,16 +70,33 @@ export function Register() {
     };
 
     // Dados que serão armazenados
-    console.log(data);
+    console.log(newTransaction);
 
     // Salvando no Storage do Dispositivo
     try {
-      await AsyncStorage.setItem(dataKey, JSON.stringify(data));
+      const data = await AsyncStorage.getItem(dataKey);
+      const currentData = data ? JSON.parse(data) : [];
+
+      const newDataToStorage = [...currentData, newTransaction];
+
+      await AsyncStorage.setItem(dataKey, JSON.stringify(newDataToStorage));
     } catch (error) {
       console.log(error);
       Alert.alert("Não foi possivel salvar os dados");
     }
   };
+
+  // Lendo os dados armazenado no storage
+  useEffect(() => {
+    async function loadData() {
+      // Estamos usando o getItem para recuperar todos os dados presentes no storage.
+      // Podemos usar o removeItem para remover os dados limpando o storage.
+      const data = await AsyncStorage.getItem(dataKey);
+      console.log({ data });
+    }
+
+    loadData();
+  }, []);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
