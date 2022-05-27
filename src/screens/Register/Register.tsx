@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Keyboard, TouchableWithoutFeedback, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
@@ -29,7 +29,7 @@ interface FormData {
   amount: string;
 }
 
-const schema = Yup.object().shape({
+const SCHEMA = Yup.object().shape({
   name: Yup.string().required("O nome é obrigatório"),
   amount: Yup.number()
     .typeError("O valor deve ser um número")
@@ -37,16 +37,9 @@ const schema = Yup.object().shape({
     .positive("O valor deve ser positivo"),
 });
 
-export function Register() {
-  const {
-    control,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+const DATA_KEY = "@controlFinance:transactions_collection";
 
+export function Register() {
   const [selectedTransaction, setSelecetedTransaction] = useState("");
   const [modalCategory, setModalCategory] = useState(false);
   const [category, setCategory] = useState({
@@ -54,8 +47,16 @@ export function Register() {
     name: "Categoria",
   });
 
+  const {
+    control,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(SCHEMA),
+  });
+
   const navigation = useNavigation();
-  const dataKey = "@controlFinance:transactions_collection";
 
   const handleSetTransactionSelected = (type: "income" | "outcome") => {
     setSelecetedTransaction(type);
@@ -77,17 +78,14 @@ export function Register() {
       date: new Date(),
     };
 
-    // Dados que serão armazenados
-    console.log(newTransaction);
-
     // Salvando no Storage do Dispositivo
     try {
-      const data = await AsyncStorage.getItem(dataKey);
-      const currentData = data ? JSON.parse(data) : [];
+      const data = await AsyncStorage.getItem(DATA_KEY);
 
+      const currentData = data ? JSON.parse(data) : [];
       const newDataToStorage = [...currentData, newTransaction];
 
-      await AsyncStorage.setItem(dataKey, JSON.stringify(newDataToStorage));
+      await AsyncStorage.setItem(DATA_KEY, JSON.stringify(newDataToStorage));
 
       // Limpando os campos após salvar os dados.
       reset();
@@ -100,22 +98,9 @@ export function Register() {
       //@ts-ignore
       navigation.navigate("Listagem");
     } catch (error) {
-      console.log(error);
       Alert.alert("Não foi possivel salvar os dados");
     }
   };
-
-  // Lendo os dados armazenado no storage
-  useEffect(() => {
-    async function loadData() {
-      // Estamos usando o getItem para recuperar todos os dados presentes no storage.
-      // Podemos usar o removeItem para remover os dados limpando o storage.
-      const data = await AsyncStorage.getItem(dataKey);
-      console.log(data);
-    }
-
-    loadData();
-  }, [AsyncStorage]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
