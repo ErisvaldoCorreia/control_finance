@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   Container,
@@ -22,32 +23,73 @@ export interface DataListProps extends DataProps {
 }
 
 export function Dashboard() {
-  const dataTransactions: DataListProps[] = [
+  const [dataTransactions, setDataTransactions] = useState<DataListProps[]>();
+
+  async function loadTransactionsFormatted() {
+    const DATA_KEY = "@controlFinance:transactions_collection";
+    const resposnse = await AsyncStorage.getItem(DATA_KEY);
+    const transactions = resposnse ? JSON.parse(resposnse) : [];
+
+    console.log({ transactions });
+
+    const transactionsFormatted: DataListProps[] = transactions.map(
+      (item: DataListProps) => {
+        const amount = Number(item.amount).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+
+        const date = Intl.DateTimeFormat("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "2-digit",
+        }).format(new Date(item.date));
+
+        return {
+          id: item.id,
+          name: item.name,
+          amount,
+          type: item.type,
+          category: item.category,
+          date,
+        };
+      }
+    );
+
+    setDataTransactions(transactionsFormatted);
+  }
+
+  useEffect(() => {
+    loadTransactionsFormatted();
+  }, [dataTransactions]);
+
+  // MOCK DATA Referencia
+  /* const dataTransactions: DataListProps[] = [
     {
       id: "1",
-      title: "Desenvolvimento de sites",
+      name: "Desenvolvimento de sites",
       amount: "R$ 1.200,00",
-      type: "positive",
+      type: "income",
       category: { name: "Serviço", icon: "dollar-sign" },
       date: "05/10/2021",
     },
     {
       id: "2",
-      title: "Hamburgueria",
+      name: "Hamburgueria",
       amount: "R$ 200,00",
-      type: "negative",
+      type: "outcome",
       category: { name: "Alimentação", icon: "coffee" },
       date: "05/10/2021",
     },
     {
       id: "3",
-      title: "Prestação da Casa",
+      name: "Prestação da Casa",
       amount: "R$ 2.500,00",
-      type: "negative",
+      type: "outcome",
       category: { name: "Casa", icon: "home" },
       date: "05/10/2021",
     },
-  ];
+  ]; */
 
   return (
     <Container>
@@ -61,7 +103,7 @@ export function Dashboard() {
             />
             <User>
               <UserGreetings>Olá,</UserGreetings>
-              <UserName>Erisvaldo</UserName>
+              <UserName>Daniele</UserName>
             </User>
           </UserInfo>
           <IconPower name="power" />

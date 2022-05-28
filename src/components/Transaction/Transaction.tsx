@@ -16,11 +16,11 @@ interface Category {
   icon: string;
 }
 
-export type EntryType = "positive" | "negative";
+export type EntryType = "income" | "outcome";
 
 export interface DataProps {
   type: EntryType;
-  title: string;
+  name: string;
   amount: string;
   date: string;
   category: Category;
@@ -33,9 +33,9 @@ interface TransactionProps {
 export function Transaction({ data }: TransactionProps) {
   return (
     <Container>
-      <Title>{data.title}</Title>
+      <Title>{data.name}</Title>
       <Amount type={data.type}>
-        {data.type === "negative" && "- "}
+        {data.type === "outcome" && "- "}
         {data.amount}
       </Amount>
 

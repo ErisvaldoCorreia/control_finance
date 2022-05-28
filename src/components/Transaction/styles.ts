@@ -22,7 +22,7 @@ export const Title = styled.Text`
 
 export const Amount = styled.Text<Transaction>`
     font-family: ${({ theme }) => theme.fonts.regular};
-    color: ${({ theme, type }) => type === 'positive' 
+    color: ${({ theme, type }) => type === 'income' 
         ? theme.colors.success
         : theme.colors.attention
     };
