@@ -1,4 +1,5 @@
 import React from "react";
+import { categories } from "../../utils/categories";
 
 import {
   Container,
@@ -11,11 +12,6 @@ import {
   DateTransaction,
 } from "./styles";
 
-interface Category {
-  name: string;
-  icon: string;
-}
-
 export type EntryType = "income" | "outcome";
 
 export interface DataProps {
@@ -23,7 +19,7 @@ export interface DataProps {
   name: string;
   amount: string;
   date: string;
-  category: Category;
+  category: string;
 }
 
 interface TransactionProps {
@@ -31,6 +27,8 @@ interface TransactionProps {
 }
 
 export function Transaction({ data }: TransactionProps) {
+  const [category] = categories.filter((item) => item.key === data.category);
+
   return (
     <Container>
       <Title>{data.name}</Title>
@@ -41,8 +39,8 @@ export function Transaction({ data }: TransactionProps) {
 
       <InfoFooter>
         <Category>
-          <Icon name={data.category.icon} />
-          <CategoryName>{data.category.name}</CategoryName>
+          <Icon name={category.icon} />
+          <CategoryName>{category.name}</CategoryName>
         </Category>
 
         <DateTransaction>{data.date}</DateTransaction>

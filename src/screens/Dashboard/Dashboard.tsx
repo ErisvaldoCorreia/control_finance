@@ -30,8 +30,6 @@ export function Dashboard() {
     const resposnse = await AsyncStorage.getItem(DATA_KEY);
     const transactions = resposnse ? JSON.parse(resposnse) : [];
 
-    console.log({ transactions });
-
     const transactionsFormatted: DataListProps[] = transactions.map(
       (item: DataListProps) => {
         const amount = Number(item.amount).toLocaleString("pt-BR", {
@@ -103,7 +101,7 @@ export function Dashboard() {
             />
             <User>
               <UserGreetings>Olá,</UserGreetings>
-              <UserName>Daniele</UserName>
+              <UserName>Erisvaldo</UserName>
             </User>
           </UserInfo>
           <IconPower name="power" />
