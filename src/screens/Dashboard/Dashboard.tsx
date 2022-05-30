@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
@@ -17,6 +17,7 @@ import {
   TransactionsListCards,
 } from "./styles";
 import { Cards, Transaction, DataProps } from "../../components";
+import { useFocusEffect } from "@react-navigation/native";
 
 export interface DataListProps extends DataProps {
   id: string;
@@ -59,35 +60,13 @@ export function Dashboard() {
 
   useEffect(() => {
     loadTransactionsFormatted();
-  }, [dataTransactions]);
+  }, []);
 
-  // MOCK DATA Referencia
-  /* const dataTransactions: DataListProps[] = [
-    {
-      id: "1",
-      name: "Desenvolvimento de sites",
-      amount: "R$ 1.200,00",
-      type: "income",
-      category: { name: "Serviço", icon: "dollar-sign" },
-      date: "05/10/2021",
-    },
-    {
-      id: "2",
-      name: "Hamburgueria",
-      amount: "R$ 200,00",
-      type: "outcome",
-      category: { name: "Alimentação", icon: "coffee" },
-      date: "05/10/2021",
-    },
-    {
-      id: "3",
-      name: "Prestação da Casa",
-      amount: "R$ 2.500,00",
-      type: "outcome",
-      category: { name: "Casa", icon: "home" },
-      date: "05/10/2021",
-    },
-  ]; */
+  useFocusEffect(
+    useCallback(() => {
+      loadTransactionsFormatted();
+    }, [])
+  );
 
   return (
     <Container>
