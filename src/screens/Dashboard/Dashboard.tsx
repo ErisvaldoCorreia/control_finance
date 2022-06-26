@@ -25,6 +25,7 @@ export interface DataListProps extends DataProps {
 
 interface TransactionsProps {
   amount: string;
+  lastTransaction: string;
 }
 
 interface TransactionsData {
@@ -38,6 +39,21 @@ export function Dashboard() {
   const [dataCards, setDataCards] = useState<TransactionsData>(
     {} as TransactionsData
   );
+
+  function getLastTransactionsDate(collection: DataListProps[], type: any) {
+    const lastIncomeTransaction = Math.max.apply(
+      Math,
+      collection
+        .filter((transaction) => transaction.type === type)
+        .map((transaction) => new Date(transaction.date).getTime())
+    );
+
+    const date = new Date(lastIncomeTransaction);
+
+    return `${date.getDate()} de ${date.toLocaleString("PT-BR", {
+      month: "long",
+    })}`;
+  }
 
   async function loadTransactionsFormatted() {
     const DATA_KEY = "@controlFinance:transactions_collection";
@@ -77,6 +93,15 @@ export function Dashboard() {
     );
 
     setDataTransactions(transactionsFormatted);
+    const lastIncomeTransaction = getLastTransactionsDate(
+      transactions,
+      "income"
+    );
+    const lastOutcomeTransaction = getLastTransactionsDate(
+      transactions,
+      "outcome"
+    );
+    const intervalTransactions = `01 à ${lastIncomeTransaction}`;
 
     const totalExpenses = incomesSum - outcomesSum;
     setDataCards({
@@ -85,18 +110,21 @@ export function Dashboard() {
           style: "currency",
           currency: "BRL",
         }),
+        lastTransaction: `Última entrada em ${lastIncomeTransaction}`,
       },
       outcome: {
         amount: outcomesSum.toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         }),
+        lastTransaction: `Última saída em ${lastOutcomeTransaction}`,
       },
       total: {
         amount: totalExpenses.toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         }),
+        lastTransaction: intervalTransactions,
       },
     });
   }
@@ -134,23 +162,20 @@ export function Dashboard() {
         <Cards
           type="income"
           title="Entrada"
-          //amount={"0"}
-          amount={dataCards?.income?.amount || "0"}
-          infoTransaction="Última entrada em 17 de jun!"
+          amount={dataCards?.income?.amount}
+          infoTransaction={dataCards?.income?.lastTransaction}
         />
         <Cards
           type="outcome"
           title="Saída"
-          //amount={"0"}
-          amount={dataCards?.outcome?.amount || "0"}
-          infoTransaction="Última saída em 19 de jun!"
+          amount={dataCards?.outcome?.amount}
+          infoTransaction={dataCards?.outcome?.lastTransaction}
         />
         <Cards
           type="total"
           title="Total"
-          //amount={"0"}
-          amount={dataCards?.total?.amount || "0"}
-          infoTransaction="Entre 17 de jun e 20 de jun!"
+          amount={dataCards?.total?.amount}
+          infoTransaction={dataCards?.total?.lastTransaction}
         />
       </CardContainer>
 
