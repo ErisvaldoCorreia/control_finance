@@ -23,16 +23,37 @@ export interface DataListProps extends DataProps {
   id: string;
 }
 
+interface TransactionsProps {
+  amount: string;
+}
+
+interface TransactionsData {
+  income: TransactionsProps;
+  outcome: TransactionsProps;
+  total: TransactionsProps;
+}
+
 export function Dashboard() {
   const [dataTransactions, setDataTransactions] = useState<DataListProps[]>();
+  const [dataCards, setDataCards] = useState<TransactionsData>(
+    {} as TransactionsData
+  );
 
   async function loadTransactionsFormatted() {
     const DATA_KEY = "@controlFinance:transactions_collection";
     const resposnse = await AsyncStorage.getItem(DATA_KEY);
     const transactions = resposnse ? JSON.parse(resposnse) : [];
+    let incomesSum = 0;
+    let outcomesSum = 0;
 
     const transactionsFormatted: DataListProps[] = transactions.map(
       (item: DataListProps) => {
+        if (item.type === "income") {
+          incomesSum += Number(item.amount);
+        } else {
+          outcomesSum += Number(item.amount);
+        }
+
         const amount = Number(item.amount).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
@@ -56,6 +77,28 @@ export function Dashboard() {
     );
 
     setDataTransactions(transactionsFormatted);
+
+    const totalExpenses = incomesSum - outcomesSum;
+    setDataCards({
+      income: {
+        amount: incomesSum.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      outcome: {
+        amount: outcomesSum.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+      total: {
+        amount: totalExpenses.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        }),
+      },
+    });
   }
 
   useEffect(() => {
@@ -91,19 +134,22 @@ export function Dashboard() {
         <Cards
           type="income"
           title="Entrada"
-          amount="R$ 10.000,00"
+          //amount={"0"}
+          amount={dataCards?.income?.amount || "0"}
           infoTransaction="Última entrada em 17 de jun!"
         />
         <Cards
           type="outcome"
           title="Saída"
-          amount="R$ 2.000,00"
+          //amount={"0"}
+          amount={dataCards?.outcome?.amount || "0"}
           infoTransaction="Última saída em 19 de jun!"
         />
         <Cards
           type="total"
           title="Total"
-          amount="R$ 8.000,00"
+          //amount={"0"}
+          amount={dataCards?.total?.amount || "0"}
           infoTransaction="Entre 17 de jun e 20 de jun!"
         />
       </CardContainer>
