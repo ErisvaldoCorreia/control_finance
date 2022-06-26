@@ -3,7 +3,7 @@ import { useTheme } from "styled-components";
 import { MaterialIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Dashboard, Register } from "../screens";
+import { Dashboard, Register, Resume } from "../screens";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export const AppRoute = () => {
         tabBarInactiveTintColor: theme.colors.text,
         tabBarLabelPosition: "beside-icon",
         tabBarStyle: {
-          height: 90,
+          height: 80,
         },
       }}
     >
@@ -46,7 +46,7 @@ export const AppRoute = () => {
       />
       <Screen
         name="Resumo"
-        component={Register}
+        component={Resume}
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="pie-chart" size={size} color={color} />
