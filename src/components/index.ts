@@ -5,3 +5,4 @@ export { InputController } from './InputController/InputController';
 export { Button } from './Button/Button';
 export { IconButton } from './IconButton/IconButton';
 export { Category } from './Category/Category';
+export { HistoryItem } from './HistoryItem/HistoryItem';
