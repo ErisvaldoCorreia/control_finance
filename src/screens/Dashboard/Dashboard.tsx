@@ -101,7 +101,7 @@ export function Dashboard() {
       transactions,
       "outcome"
     );
-    const intervalTransactions = `01 à ${lastIncomeTransaction}`;
+    const intervalTransactions = `01 à ${lastOutcomeTransaction}`;
 
     const totalExpenses = incomesSum - outcomesSum;
     setDataCards({
