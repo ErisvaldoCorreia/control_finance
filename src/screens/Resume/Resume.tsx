@@ -1,14 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
+import { VictoryPie } from "victory-native";
 import { DataProps, HistoryItem } from "../../components";
 import { categories } from "../../utils/categories";
 
-import { Container, Content, Header, Title } from "./styles";
+import { Container, Content, Header, Title, ChartContainer } from "./styles";
 
 interface CategoryTotalProps {
   name: string;
   amount: string;
+  total: number;
   color: string;
   key: string;
 }
@@ -48,6 +50,7 @@ export function Resume() {
           name: category.name,
           color: category.color,
           key: category.key,
+          total: outcomeSum,
           amount,
         });
       }
@@ -73,6 +76,10 @@ export function Resume() {
       </Header>
 
       <Content>
+        <ChartContainer>
+          <VictoryPie data={totalByCategories} x="name" y="total" />
+        </ChartContainer>
+
         {totalByCategories.map((item) => (
           <HistoryItem
             key={item.key}
