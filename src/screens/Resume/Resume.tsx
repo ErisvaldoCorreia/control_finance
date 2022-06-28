@@ -11,6 +11,7 @@ interface CategoryTotalProps {
   name: string;
   amount: string;
   total: number;
+  totalPercent: string;
   color: string;
   key: string;
 }
@@ -27,6 +28,13 @@ export function Resume() {
 
     const outcomes = transactions.filter(
       (transaction: DataProps) => transaction.type === "outcome"
+    );
+
+    const totalOutcomes = outcomes.reduce(
+      (accumulator: number, transaction: DataProps) => {
+        return accumulator + Number(transaction.amount);
+      },
+      0
     );
 
     const totalOutcomesCategory: CategoryTotalProps[] = [];
@@ -46,11 +54,14 @@ export function Resume() {
           currency: "BRL",
         });
 
+        const percent = `${((outcomeSum / totalOutcomes) * 100).toFixed(0)}%`;
+
         totalOutcomesCategory.push({
           name: category.name,
           color: category.color,
           key: category.key,
           total: outcomeSum,
+          totalPercent: percent,
           amount,
         });
       }
@@ -77,7 +88,20 @@ export function Resume() {
 
       <Content>
         <ChartContainer>
-          <VictoryPie data={totalByCategories} x="name" y="total" />
+          <VictoryPie
+            colorScale={totalByCategories.map((category) => category.color)}
+            data={totalByCategories}
+            height={340}
+            style={{
+              labels: {
+                fontSize: 16,
+                fontWeight: "bold",
+              },
+            }}
+            labelRadius={130}
+            x="totalPercent"
+            y="total"
+          />
         </ChartContainer>
 
         {totalByCategories.map((item) => (
