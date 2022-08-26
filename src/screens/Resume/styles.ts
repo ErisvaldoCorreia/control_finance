@@ -32,10 +32,21 @@ export const ChartContainer = styled.View`
   align-items: center;
 `;
 
-export const MonthSelect = styled.View``;
+//configurações do estilo do filtro
+export const MonthSelect = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${RFValue(24)}px;
+`;
 
 export const MonthSelectButton = styled(BorderlessButton)``;
 
-export const MonthSelectIcon = styled(Feather)``;
+export const MonthSelectIcon = styled(Feather)`
+  font-size: ${RFValue(24)}px;
+`;
 
-export const MonthCurrently = styled.Text``;
+export const MonthCurrently = styled.Text`
+  font-family: ${({theme}) => theme.fonts.regular};
+  font-size: ${RFValue(20)}px;
+`;
