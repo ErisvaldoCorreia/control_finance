@@ -2,10 +2,17 @@ import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 
+import { EntryType } from './Transaction';
+
+interface Transaction {
+    type: EntryType
+}
+
 export const Container = styled.View`
     background-color: ${({ theme }) => theme.colors.shape};
-    border-radius: 5px;
+    border-radius: ${RFValue(10)}px;
     padding: 17px 24px;
+    margin-bottom: 16px
 `;
 
 export const Title = styled.Text`
@@ -13,9 +20,12 @@ export const Title = styled.Text`
     font-size: ${RFValue(14)}px;
 `;
 
-export const Amount = styled.Text`
+export const Amount = styled.Text<Transaction>`
     font-family: ${({ theme }) => theme.fonts.regular};
-    color: ${({ theme }) => theme.colors.success};
+    color: ${({ theme, type }) => type === 'income' 
+        ? theme.colors.success
+        : theme.colors.attention
+    };
     font-size: ${RFValue(20)}px;
     margin-top: 2px;
 `;

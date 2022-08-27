@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { Platform, FlatList } from 'react-native';
+import { DataListProps } from './Dashboard';
 
 export const Container = styled.View`
     flex: 1;
@@ -9,7 +11,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     width: 100%;
-    height: ${RFPercentage(40)}px;
+    height: ${RFValue(278)}px;
     background-color: ${({theme}) => theme.colors.primary};
     justify-content: flex-start;
     align-items: center;
@@ -20,7 +22,7 @@ export const UserWrapper = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: ${RFValue(28)}px;
+    margin-top: ${Platform.OS === 'ios' ? RFValue(48) : RFValue(28)}px;
     padding: 0 24px;
 `;
 
@@ -32,7 +34,7 @@ export const UserInfo = styled.View`
 export const Photo = styled.Image`
     width: ${RFValue(48)}px;
     height: ${RFValue(48)}px;
-    border-radius: 10px;
+    border-radius: ${RFValue(10)}px;
 `;
 
 export const User = styled.View`
@@ -60,7 +62,7 @@ export const IconPower = styled(Feather)`
 export const CardContainer = styled.ScrollView.attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
-    contentContainerStyle: { paddingHorizontal: 24 }
+    contentContainerStyle: { paddingLeft: 24 }
 })`
     width: 100%;
     position: absolute;
@@ -70,10 +72,20 @@ export const CardContainer = styled.ScrollView.attrs({
 export const ListTransactions = styled.View`
     flex: 1;
     padding: 0 24px;
-    margin-top: ${RFPercentage(12)}px;
+    margin-top: ${RFPercentage(10)}px;
 `;
 
 export const Title = styled.Text`
     font-family: ${({theme}) => theme.fonts.regular};
     font-size: ${RFValue(18)}px;
+    margin-bottom: ${RFValue(16)}px;
 `;
+
+export const TransactionsListCards = styled(
+        FlatList as new () => FlatList<DataListProps>
+    ).attrs({
+        showsVerticalScrollIndicator: false,
+        contentContainerStyle: {
+        paddingBottom: Platform.OS === "ios" ? 30 : 0,
+    },
+})``;
