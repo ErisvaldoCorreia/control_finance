@@ -16,6 +16,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import theme from "./src/theme/theme";
 import { AppRoute } from "./src/routes/app.routes";
 
+import { Signin } from "./src/screens/Signin/Signin";
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -31,7 +33,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <StatusBar backgroundColor="#5636d3" barStyle="light-content" />
-        <AppRoute />
+        <Signin />
       </NavigationContainer>
     </ThemeProvider>
   );
