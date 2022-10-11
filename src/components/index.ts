@@ -6,3 +6,4 @@ export { Button } from './Button/Button';
 export { IconButton } from './IconButton/IconButton';
 export { Category } from './Category/Category';
 export { HistoryItem } from './HistoryItem/HistoryItem';
+export { SocialButton } from './SocialButton/SocialButton';
