@@ -7,7 +7,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height: 65%;
+  height: 70%;
 
   background-color: ${({theme}) => theme.colors.primary};
   justify-content: flex-end;
@@ -22,12 +22,22 @@ export const Title = styled.Text`
   font-family: ${({theme}) => theme.fonts.medium};
   color: ${({theme}) => theme.colors.shape};
   font-size: ${RFValue(30)}px;
-  text-align: center
+  text-align: center;
+  margin-top: ${RFValue(45)}px;
 `;
 
 export const SigninTitle = styled.Text`
   font-family: ${({theme}) => theme.fonts.regular};
   color: ${({theme}) => theme.colors.shape};
   font-size: ${RFValue(16)}px;
-  text-align: center
+  text-align: center;
+  margin-top: ${RFValue(80)}px;
+  margin-bottom: ${RFValue(67)}px;
+`;
+
+export const Footer = styled.Text`
+  width: 100%;
+  height: 30%;
+
+  background-color: ${({theme}) => theme.colors.secondary};
 `;
