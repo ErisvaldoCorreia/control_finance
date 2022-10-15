@@ -2,6 +2,10 @@ import React from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import { SocialButton } from "../../components";
+import LogoSvg from "../../assets/logo.svg";
+import GoogleSvg from "../../assets/google.svg";
+import AppleSvg from "../../assets/apple.svg";
+import { useAuth } from "../../hooks";
 
 import {
   Container,
@@ -13,11 +17,10 @@ import {
   FooterWrapper,
 } from "./style";
 
-import LogoSvg from "../../assets/logo.svg";
-import GoogleSvg from "../../assets/google.svg";
-import AppleSvg from "../../assets/apple.svg";
-
 export function Signin() {
+  const response = useAuth();
+  console.log({ response });
+
   return (
     <Container>
       <Header>
