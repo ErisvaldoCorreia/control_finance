@@ -1,9 +1,10 @@
 {
-  "name": "control_finance",
-  "displayName": "control_finance",
+  "name": "controlfinance",
+  "displayName": "controlfinance",
   "expo": {
-    "name": "control_finance",
-    "slug": "control_finance",
+    "name": "controlfinance",
+    "slug": "controlfinance",
+    "scheme": "controlfinance",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

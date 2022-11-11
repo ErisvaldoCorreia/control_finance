@@ -18,8 +18,15 @@ import {
 } from "./style";
 
 export function Signin() {
-  const response = useAuth();
-  console.log({ response });
+  const { signinWithGoogle } = useAuth();
+
+  const handleSignInGoogle = async () => {
+    try {
+      await signinWithGoogle();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Container>
@@ -37,7 +44,11 @@ export function Signin() {
       </Header>
       <Footer>
         <FooterWrapper>
-          <SocialButton title="Login com Google" svg={GoogleSvg} />
+          <SocialButton
+            title="Login com Google"
+            svg={GoogleSvg}
+            onPress={handleSignInGoogle}
+          />
           <SocialButton title="Login com Apple" svg={AppleSvg} />
         </FooterWrapper>
       </Footer>
