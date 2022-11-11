@@ -1,6 +1,9 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import * as AuthSession from "expo-auth-session";
 
+const { CLIENT_ID } = process.env;
+const { REDIRECT_ID } = process.env;
+
 interface Props {
   children: ReactNode;
 }
@@ -30,9 +33,6 @@ export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<User>({} as User);
 
   const signinWithGoogle = async () => {
-    const CLIENT_ID =
-      "350882021611-0q42tqrvkp0qe7k13epj7jg08dgacciu.apps.googleusercontent.com";
-    const REDIRECT_ID = "https://auth.expo.io/@developerjunior/controlfinance";
     const RESPONSE_TYPE = "token";
     const SCOPE = encodeURI("profile email");
     const baseURL = "https://accounts.google.com/o/oauth2/v2/auth";
