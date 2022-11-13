@@ -11,12 +11,9 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 import AppLoading from "expo-app-loading";
-import { NavigationContainer } from "@react-navigation/native";
 
 import theme from "./src/theme/theme";
-import { AppRoute } from "./src/routes/app.routes";
-
-import { Signin } from "./src/screens/Signin/Signin";
+import { Routes } from "./src/routes/";
 import { AuthProvider } from "./src/hooks";
 
 export default function App() {
@@ -32,13 +29,11 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar backgroundColor="#5636d3" barStyle="light-content" />
+      <StatusBar backgroundColor="#5636d3" barStyle="light-content" />
 
-        <AuthProvider>
-          <Signin />
-        </AuthProvider>
-      </NavigationContainer>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
