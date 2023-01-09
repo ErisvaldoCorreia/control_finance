@@ -150,8 +150,9 @@ export function Dashboard() {
               }}
             />
             <User>
-              <UserGreetings>Olá,</UserGreetings>
-              <UserName>Erisvaldo</UserName>
+              {/* recuperar dados advindos do usuario */}
+              <UserGreetings>Olá, bem vindo</UserGreetings>
+              <UserName>Erisvaldo Correia</UserName>
             </User>
           </UserInfo>
           <IconPower name="power" />
